@@ -91,7 +91,7 @@
     }
     riot.mixin('translate', { translate: exports });
 
-	riot.tag2('translate', '<span ref="original"><yield></yield></span>', 'translate,[riot-tag="translate"],[data-is="translate"]{ display: inline; }', '', function(opts) {
+	riot.tag2('translate', '<span ref="original"><yield></yield></span>', 'translate,[riot-tag="translate"],[data-is="translate"]{ display: inline; }span[ref="original"]{ display: none; }', '', function(opts) {
 	    this.mixin('translate')
 
 	    this.translate.on('update', function() {
@@ -113,13 +113,11 @@
 			for (var key in this.opts) {
 				phrase = phrase.replace('{' + key.replace(/([A-Z])/g, "-$1").toLowerCase() + '}', this.opts[key]);
 			}
-			var parentNode = this.root;
-			while (parentNode.hasChildNodes()) {
-    			parentNode.removeChild(parentNode.firstChild);
+			var rootNode = this.root;
+			while (rootNode.hasChildNodes()) {
+    			rootNode.removeChild(rootNode.firstChild);
 			}
-			var span = document.createElement('span');
-			span.innerHTML = phrase;
-			parentNode.appendChild(span);
+			rootNode.innerHTML = phrase;
 		}
 	});
 }));
