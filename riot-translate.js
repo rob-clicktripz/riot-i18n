@@ -4,7 +4,7 @@
             factory((root.translate = exports), riot);
         });
     } else if (typeof exports === 'object') {
-        factory(exports, require('riot'));
+        factory(exports, window.riot);
     } else {
         factory((root.translate = {}), root.riot);
     }
