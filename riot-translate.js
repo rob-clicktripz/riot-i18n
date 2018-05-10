@@ -12,11 +12,14 @@
 
     var DEFAULT_LANG = 'en';
 
+	console.error('riot-translate');
+
     function Translate() {
         this._entities = {};
         this._default = DEFAULT_LANG;
         this._language = this._default;
         var obs = riot.observable();
+        this.exceptions = [];
         this.on = obs.on;
         this.off = obs.off;
         this.trigger = obs.trigger;
@@ -57,6 +60,10 @@
             locale = flatten(this._entities[this._language]);
 
             if (!locale[key]) {
+				var notFoundMessage = 'The phrase "' + key + '" was not found in the dictionary';
+				if (!this.exceptions.includes(notFoundMessage)) {
+					this.exceptions.push(notFoundMessage);
+				}
                 substitute = key;
             } else {
                 substitute = locale[key];
@@ -75,7 +82,7 @@
     }
 
     Translate.prototype.setLanguage = function(lang) {
-        this._language = lang || this._default
+        this._language = lang || this._default;
         this.trigger('update');
     }
 
