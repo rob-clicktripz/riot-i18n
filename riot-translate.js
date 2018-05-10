@@ -12,8 +12,6 @@
 
     var DEFAULT_LANG = 'en';
 
-	console.error('riot-translate');
-
     function Translate() {
         this._entities = {};
         this._default = DEFAULT_LANG;
