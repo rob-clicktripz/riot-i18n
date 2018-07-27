@@ -116,7 +116,7 @@
 			var refs = this.hasRefs ? this.refs : this;
 			var phrase = this.translate.apply(refs.original.innerHTML);
 			for (var key in this.opts) {
-				phrase = phrase.replace('{' + key.replace(/([A-Z])/g, "-$1").toLowerCase() + '}', this.opts[key]);
+				phrase = phrase.replace('{' + key.replace(/([A-Z])/g, "-$1").toLowerCase() + '}', '<span ref="' + key + '">' + this.opts[key] + '</span>');
 			}
 			var rootNode = this.root;
 			while (rootNode.hasChildNodes()) {
